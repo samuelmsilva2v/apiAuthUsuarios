@@ -10,4 +10,5 @@ import com.example.demo.domain.models.entities.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, UUID>{
 
+	boolean existsByEmail(String email);
 }
