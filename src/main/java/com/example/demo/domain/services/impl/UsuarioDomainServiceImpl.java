@@ -9,6 +9,7 @@ import com.example.demo.domain.models.dtos.AutenticarUsuarioRequestDto;
 import com.example.demo.domain.models.dtos.CriarUsuarioRequestDto;
 import com.example.demo.domain.models.entities.Usuario;
 import com.example.demo.domain.services.interfaces.UsuarioDomainService;
+import com.example.demo.infrastructure.components.JwtTokenComponent;
 import com.example.demo.infrastructure.helpers.CryptoHelper;
 import com.example.demo.infrastructure.repositories.UsuarioRepository;
 
@@ -17,6 +18,9 @@ public class UsuarioDomainServiceImpl implements UsuarioDomainService {
 
 	@Autowired
 	UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	JwtTokenComponent jwtTokenComponent;
 
 	@Override
 	public String criarUsuario(CriarUsuarioRequestDto dto) {
@@ -45,8 +49,7 @@ public class UsuarioDomainServiceImpl implements UsuarioDomainService {
 		var usuario = usuarioRepository.find(dto.getEmail(), CryptoHelper.SHA256Encrypt(dto.getSenha()));
 
 		if (usuario != null) {
-			// TODO
-			return "<<TOKEN>>";
+			return jwtTokenComponent.generateToken(usuario);
 		} else {
 			return "Acesso negado. Usuário não encontrado.";
 		}
