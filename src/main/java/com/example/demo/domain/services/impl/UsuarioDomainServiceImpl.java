@@ -41,8 +41,16 @@ public class UsuarioDomainServiceImpl implements UsuarioDomainService {
 
 	@Override
 	public String autenticarUsuario(AutenticarUsuarioRequestDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+
+		var usuario = usuarioRepository.find(dto.getEmail(), CryptoHelper.SHA256Encrypt(dto.getSenha()));
+
+		if (usuario != null) {
+			// TODO
+			return "<<TOKEN>>";
+		} else {
+			return "Acesso negado. Usuário não encontrado.";
+		}
+
 	}
 
 }

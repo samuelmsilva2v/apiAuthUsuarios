@@ -26,6 +26,6 @@ public class UsuarioController {
 	
 	@PostMapping("autenticar")
 	public String autenticar(@RequestBody @Valid AutenticarUsuarioRequestDto dto) {
-		return "Usuário autenticado com sucesso!";
+		return usuarioDomainService.autenticarUsuario(dto);
 	}
 }

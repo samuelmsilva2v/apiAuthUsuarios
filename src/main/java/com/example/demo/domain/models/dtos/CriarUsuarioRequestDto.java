@@ -2,12 +2,14 @@ package com.example.demo.domain.models.dtos;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
 public class CriarUsuarioRequestDto {
 
+	@NotEmpty(message = "Por favor, informe o nome do usuário.")
 	private String nome;
 	
 	@Email(message = "Por favor, informe um endereço de e-mail válido.")
