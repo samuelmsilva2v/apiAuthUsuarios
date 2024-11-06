@@ -18,7 +18,7 @@ public class UsuarioDomainServiceImpl implements UsuarioDomainService {
 
 	@Autowired
 	UsuarioRepository usuarioRepository;
-	
+
 	@Autowired
 	JwtTokenComponent jwtTokenComponent;
 
@@ -33,11 +33,9 @@ public class UsuarioDomainServiceImpl implements UsuarioDomainService {
 		usuario.setSenha(CryptoHelper.SHA256Encrypt(dto.getSenha()));
 
 		if (usuarioRepository.existsByEmail(usuario.getEmail())) {
-			return "O e-mail informado já está cadastrado, tente outro.";
+			throw new IllegalArgumentException("O e-mail informado já está cadastrado, tente outro.");
 		} else {
-
 			usuarioRepository.save(usuario);
-
 			return "Usuário cadastrado com sucesso!";
 		}
 
@@ -51,7 +49,7 @@ public class UsuarioDomainServiceImpl implements UsuarioDomainService {
 		if (usuario != null) {
 			return jwtTokenComponent.generateToken(usuario);
 		} else {
-			return "Acesso negado. Usuário não encontrado.";
+			throw new IllegalArgumentException("Acesso negado. Cadastro não encontrado.");
 		}
 
 	}
