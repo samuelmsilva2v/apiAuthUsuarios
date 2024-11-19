@@ -1,27 +1,53 @@
-# Getting Started
+# API Auth Usuários
+API RESTful desenvolvida em Spring Boot para criação e autenticação de usuários através de e-mail e senha.
 
-### Reference Documentation
-For further reference, please consider the following sections:
+### Tecnologias utilizadas:
+- Spring Boot
+- JPA / Hibernate
+- Maven
+- PostgreSQL
+- JWT
+- Swagger (para documentação)
+- Postman (para testes dos endpoints)
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/3.3.5/maven-plugin)
-* [Create an OCI image](https://docs.spring.io/spring-boot/3.3.5/maven-plugin/build-image.html)
-* [Spring Data JPA](https://docs.spring.io/spring-boot/3.3.5/reference/data/sql.html#data.sql.jpa-and-spring-data)
-* [Spring Boot DevTools](https://docs.spring.io/spring-boot/3.3.5/reference/using/devtools.html)
-* [Spring Web](https://docs.spring.io/spring-boot/3.3.5/reference/web/servlet.html)
+## Endpoints 
+| Método | Endpoint             | Descrição                   |
+|--------|-----------------------|-----------------------------|
+| POST   | `/api/usuarios/criar`      | Cadastrar um novo usuário      |
+| POST    | `/api/usuarios/autenticar`      | Autenticar usuário   |
 
-### Guides
-The following guides illustrate how to use some features concretely:
+```json
+{
+  "nome": "string",
+  "email": "string",
+  "senha": "nMgNLgCojs!y?3l@oZUsRT9w2ew7cPMQJQxmXLspdpH&xMBu%wR!Drz?rSeOzhVRlTkXzaZkw$9CY"
+}
+```
 
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
+## Configuração e Execução
 
-### Maven Parent overrides
+### 1. Clone o repositório:
 
-Due to Maven's design, elements are inherited from the parent POM to the project POM.
-While most of the inheritance is fine, it also inherits unwanted elements like `<license>` and `<developers>` from the parent.
-To prevent this, the project POM contains empty overrides for these elements.
-If you manually switch to a different parent and actually want the inheritance, you need to remove those overrides.
+```bash
+https://github.com/samuelmsilva2v/apiAuthUsuarios.git
+cd apiAuthUsuarios
+```
 
+### 2. Instale as dependências:
+
+```bash
+mvn clean install
+```
+
+### 3. Execute o projeto:
+```bash
+mvn spring-boot:run
+```
+
+### 4. Acesse a aplicação:
+  - Documentação da API: http://localhost:8081/swagger-ui/index.html
+
+### Autor
+- Samuel Maciel da Silva
+  - [LinkedIn](https://www.linkedin.com/in/samuelmsilva2v/)
+  - [E-mail](mailto:samuelmsilva@outlook.com.br)
