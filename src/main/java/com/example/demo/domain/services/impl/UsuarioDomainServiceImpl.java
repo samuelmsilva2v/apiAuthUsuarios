@@ -10,6 +10,7 @@ import com.example.demo.domain.models.dtos.CriarUsuarioRequestDto;
 import com.example.demo.domain.models.entities.Usuario;
 import com.example.demo.domain.services.interfaces.UsuarioDomainService;
 import com.example.demo.infrastructure.components.JwtTokenComponent;
+import com.example.demo.infrastructure.components.MessageProducerComponent;
 import com.example.demo.infrastructure.helpers.CryptoHelper;
 import com.example.demo.infrastructure.repositories.UsuarioRepository;
 
@@ -21,6 +22,9 @@ public class UsuarioDomainServiceImpl implements UsuarioDomainService {
 
 	@Autowired
 	JwtTokenComponent jwtTokenComponent;
+
+	@Autowired
+	MessageProducerComponent messageProducerComponent;
 
 	@Override
 	public String criarUsuario(CriarUsuarioRequestDto dto) {
@@ -36,6 +40,13 @@ public class UsuarioDomainServiceImpl implements UsuarioDomainService {
 			throw new IllegalArgumentException("O e-mail informado já está cadastrado, tente outro.");
 		} else {
 			usuarioRepository.save(usuario);
+			
+			try {
+				messageProducerComponent.send(usuario);
+			} 
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 			return "Usuário cadastrado com sucesso!";
 		}
 
